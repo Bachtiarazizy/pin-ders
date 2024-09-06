@@ -1,0 +1,54 @@
+// schema.prisma
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+ id           String   @id @unique
+  email        String
+  firstName    String
+  lastName     String
+  profileImage String
+  createdAt      DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  pins   Pin[]
+  boards    Board[]
+}
+
+model Pin {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  images      String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      String?  // Nullable
+  user        User?    @relation(fields: [userId], references: [id])
+  boards      Board[]  @relation("BoardPins")
+  // tags        Tag[]    @relation("PinTags")
+}
+
+model Board {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  isPrivate   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      String?  // Nullable
+  user        User?    @relation(fields: [userId], references: [id])
+  pins     Pin[] @relation("BoardPins")
+}
+
+
+model Tag {
+  id          String   @id @default(uuid())
+  name    String   @unique
+  // pins Pin[] @relation("PinTags")
+}
