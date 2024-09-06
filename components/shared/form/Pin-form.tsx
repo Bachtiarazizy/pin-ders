@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { UploadDropzone } from "@/lib/uploadthing";
 import { TipTapEditor } from "./Editor";
 import { SubmitButton } from "../SubmitButton";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function PinForm() {
   const [images, setImages] = useState<string[]>([]);
@@ -53,6 +54,13 @@ export default function PinForm() {
               <TipTapEditor json={descriptionJson} setJson={setDescriptionJson} />
               <input type="hidden" name="description" value={JSON.stringify(descriptionJson)} />
               <p className="text-red-500">{fields.description.errors}</p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-3">
+                <Label>Tags</Label>
+                <Input type="text" key={fields.tags.key} name={fields.tags.name} defaultValue={fields.tags.initialValue} className="w-full" placeholder="tags" />
+                <p className="text-red-500">{fields.tags.errors}</p>
+              </div>
             </div>
 
             <div className="flex flex-col gap-3">

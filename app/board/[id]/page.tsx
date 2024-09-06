@@ -43,7 +43,6 @@ export default async function BoardIdPage({ params }: { params: { id: string } }
         <DialogContent className="max-w-3xl w-full mx-auto max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Create Pin</DialogTitle>
-            <PinForm />
           </DialogHeader>
         </DialogContent>
       </Dialog>

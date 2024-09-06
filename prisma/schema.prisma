@@ -26,12 +26,14 @@ model Pin {
   title       String
   description String
   images      String[]
+  link        String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  userId      String?  // Nullable
+  likes       Int       @default(0)
+  userId      String
   user        User?    @relation(fields: [userId], references: [id])
   boards      Board[]  @relation("BoardPins")
-  // tags        Tag[]    @relation("PinTags")
+  tags        Tag[]    @relation("PinTags")
 }
 
 model Board {
@@ -50,5 +52,7 @@ model Board {
 model Tag {
   id          String   @id @default(uuid())
   name    String   @unique
-  // pins Pin[] @relation("PinTags")
+  pins Pin[] @relation("PinTags")
 }
+
+

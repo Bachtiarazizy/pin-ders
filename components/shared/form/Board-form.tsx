@@ -4,19 +4,19 @@ import { SubmitButton } from "@/components/shared/SubmitButton";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { BoardSchema } from "@/lib/schemas";
 import { parseWithZod } from "@conform-to/zod";
 import { useFormState } from "react-dom";
 import { useForm } from "@conform-to/react";
 import { Switch } from "@/components/ui/switch";
 import { createBoard } from "@/actions/board-action";
+import { boardSchema } from "@/lib/schemas";
 
 export default function BoardForm() {
   const [lastResult, action] = useFormState(createBoard, undefined);
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
-      return parseWithZod(formData, { schema: BoardSchema });
+      return parseWithZod(formData, { schema: boardSchema });
     },
     shouldValidate: "onBlur",
     shouldRevalidate: "onInput",

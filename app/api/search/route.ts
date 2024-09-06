@@ -12,7 +12,7 @@ export async function GET(request: Request) {
   try {
     const pins = await prisma.pin.findMany({
       where: {
-        OR: [{ title: { contains: q, mode: "insensitive" } }, { description: { contains: q, mode: "insensitive" } }, { content: { contains: q, mode: "insensitive" } }],
+        OR: [{ title: { contains: q, mode: "insensitive" } }, { description: { contains: q, mode: "insensitive" } }],
       },
       include: {
         user: {
@@ -21,7 +21,7 @@ export async function GET(request: Request) {
             lastName: true,
           },
         },
-        tags: true,
+        // tags: true,
       },
       take: 10,
     });

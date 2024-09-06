@@ -2,7 +2,7 @@
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "../lib/db";
-import { BoardSchema } from "../lib/schemas";
+import { boardSchema } from "../lib/schemas";
 import { parseWithZod } from "@conform-to/zod";
 import { redirect } from "next/navigation";
 
@@ -15,7 +15,7 @@ export async function createBoard(prevState: unknown, formData: FormData) {
   }
 
   const submission = parseWithZod(formData, {
-    schema: BoardSchema,
+    schema: boardSchema,
   });
 
   if (submission.status !== "success") {
